@@ -1,0 +1,50 @@
+﻿@model WebApp.Models.Member
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="section-title mb-3">Register as a Member</h2>
+            <p class="mb-4">Please fill in the information below to register a new account.</p>
+
+            @if (TempData["RegisterError"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["RegisterError"]
+                </div>
+            }
+
+            <form method="post" action="/auth/Register">
+                <div class="form-group">
+                    <label asp-for="Name">First Name</label>
+                    <input type="text" name="Name" class="form-control" placeholder="Enter your first name" required />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Surname">Surname</label>
+                    <input type="text" name="Surname" class="form-control" placeholder="Enter your surname" required />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="GivenName">Full Name</label>
+                    <input type="text" name="GivenName" class="form-control" placeholder="Enter your full name" required />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email">Email</label>
+                    <input type="email" name="Email" class="form-control" placeholder="Enter your email address" required />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password">Password</label>
+                    <input type="password" name="Password" class="form-control" placeholder="Enter a secure password" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </form>
+        </div>
+    </div>
+</div>

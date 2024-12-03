@@ -1,0 +1,133 @@
+﻿@* <!-- Menu Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Food Menu</h5>
+            <h1 class="mb-5">Most Popular Items</h1>
+        </div>
+        <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+            @{
+                var menu = ViewBag.Menu as List<Menus>;
+                var products = ViewBag.Pro as List<Products>;
+            }
+            <!-- Menu Tabs -->
+            <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                @foreach (var item in menu.Take(3))
+                {
+                    <li class="nav-item">
+                        <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 @((menu.IndexOf(item) == 0 ? "active" : ""))" data-bs-toggle="pill" href="#tab-@item.MenuId">
+                            <i class="fa fa-coffee fa-2x text-primary"></i>
+                            <div class="ps-3">
+                                <small class="text-body">@item.Name</small>
+                                <h6 class="mt-n1 mb-0">@item.Name</h6>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+
+            <!-- Products Content -->
+            <div class="tab-content">
+                @foreach (var me in menu.Take(3))
+                {
+                    <div id="tab-@me.MenuId" class="tab-pane fade @((menu.IndexOf(me) == 0 ? "show active" : "")) p-0">
+                        <div class="row g-4">
+                            @foreach (var item in products.Where(p => p.MenuId == me.MenuId))
+                            {
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="@item.Images" alt="" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>@item.Name</span>
+                                                <span class="text-primary">@item.Price</span>
+                                            </h5>
+                                            <small class="fst-italic">@item.Description</small>
+                                            <a href="/cart/addtocart?productId=@item.ProductId"
+                                               class="btn btn-primary">Add To Card</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Menu End --> *@
+
+<!-- Menu Start -->
+@inject IHttpContextAccessor HttpContextAccessor
+<div class="container-xxl py-5">
+	<div class="container">
+		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+			<h5 class="section-title ff-secondary text-center text-primary fw-normal">Food Menu</h5>
+			<h1 class="mb-5">Most Popular Items</h1>
+		</div>
+
+		<!-- Search Bar -->
+		<div class="mb-4">
+			<form method="get" action="/Home/Menu">
+				<div class="input-group">
+					<input type="text" name="search" class="form-control" placeholder="Search for products..."
+						   value="@HttpContextAccessor.HttpContext.Request.Query["search"]" />
+					<button type="submit" class="btn btn-primary">Search</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+			@{
+				var menu = ViewBag.Menu as List<Menus>;
+				var products = ViewBag.Pro as List<Products>;
+			}
+			<!-- Menu Tabs -->
+			<ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+				@foreach (var item in menu.Take(3))
+				{
+					<li class="nav-item">
+						<a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 @((menu.IndexOf(item) == 0 ? "active" : ""))" data-bs-toggle="pill" href="#tab-@item.MenuId">
+							<i class="fa fa-coffee fa-2x text-primary"></i>
+							<div class="ps-3">
+								<small class="text-body">@item.Name</small>
+								<h6 class="mt-n1 mb-0">@item.Name</h6>
+							</div>
+						</a>
+					</li>
+				}
+			</ul>
+
+			<!-- Products Content -->
+			<div class="tab-content">
+				@foreach (var me in menu.Take(3))
+				{
+					<div id="tab-@me.MenuId" class="tab-pane fade @((menu.IndexOf(me) == 0 ? "show active" : "")) p-0">
+						<div class="row g-4">
+							@foreach (var item in products.Where(p => p.MenuId == me.MenuId))
+							{
+								<div class="col-lg-4 col-md-6">
+									<div class="d-flex align-items-center">
+										<img class="flex-shrink-0 img-fluid rounded" src="@item.Images" alt="" style="width: 80px;">
+										<div class="w-100 d-flex flex-column text-start ps-4">
+											<h5 class="d-flex justify-content-between border-bottom pb-2">
+												<span>@item.Name</span>
+												<span class="text-primary">@item.Price</span>
+											</h5>
+											<small class="fst-italic">@item.Description</small>
+											<a href="/cart/addtocart?productId=@item.ProductId"
+											   class="btn btn-primary">Add To Card</a>
+										</div>
+									</div>
+								</div>
+							}
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Menu End -->

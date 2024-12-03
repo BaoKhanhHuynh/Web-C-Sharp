@@ -1,0 +1,51 @@
+﻿@model Products
+
+<form method="post" action="/admin/products/edit/" enctype="multipart/form-data">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4 shadow">
+            <h6 class="fw-bold text-primary mb-4">Edit Product</h6>
+
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <input type="hidden" asp-for="ProductId" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Name" class="form-label">Name</label>
+                    <input type="text" asp-for="Name" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <input type="text" asp-for="Description" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Price" class="form-label">Price</label>
+                    <input type="text" asp-for="Price" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Images" class="form-label">Image</label>
+                    <div>
+                        <img src="@Model.Images" class="img-thumbnail" style="width: 100px; height: 100px;" />
+                    </div>
+                    <input type="hidden" value="@Model.Images" name="Images" />
+                    <input type="file" name="file" class="form-control" />
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                        <label for="MenuId" class="form-label">Select Menu</label>
+                        @Html.DropDownList("MenuId", ViewBag.MenuSelectList as SelectList, "Select Menu", new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="/admin/products" class="btn btn-secondary ms-2">Back to Menus</a>
+            </div>
+        </div>
+    </div>
+</form>

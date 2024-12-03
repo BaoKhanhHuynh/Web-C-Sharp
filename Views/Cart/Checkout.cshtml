@@ -1,0 +1,87 @@
+﻿@{
+    var Model = ViewBag.CartItems as List<CartItemDetails>;
+}
+
+<!-- Checkout Start -->
+<div class="checkout py-5">
+    <div class="container">
+        <div class="alert alert-danger" role="alert" asp-validation-summary="All"></div>
+        <form method="post" action="/cart/checkout">
+            <div class="row g-4">
+                <div class="col-md-7">
+                    <div class="billing-address">
+                        <h2 class="mb-4">Billing Address</h2>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="first" name="firstName"
+                                       placeholder="First Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="last" name="lastName"
+                                       placeholder="Last Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                       placeholder="Phone Number" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" id="email" name="email"
+                                       placeholder="Email Address" required>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control" id="address" name="address"
+                                       placeholder="Your Address" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="country" name="country"
+                                       placeholder="Country" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="state" name="state" placeholder="State">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="total" name="totalAmount"
+                                       value="@Model.Sum(p => p.Products.Price * p.Quantity)" readonly>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" name="note" id="message" rows="4"
+                                          placeholder="Order Notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="checkout-summary border p-4 mb-4">
+                        <h2 class="mb-4">Cart Total</h2>
+                        <div class="checkout-content">
+                            <h3>Products</h3>
+                            @foreach (var item in Model)
+                            {
+                                <p>@item.Products.Name x @item.Quantity <span class="float-end">$@(item.Products.Price * item.Quantity)</span></p>
+                            }
+                            <p class="sub-total fw-bold">Sub Total <span class="float-end">$@Model.Sum(p => p.Products.Price * p.Quantity)</span></p>
+                        </div>
+                    </div>
+
+                    <div class="checkout-payment border p-4">
+                        <h2 class="mb-4">Payment Methods</h2>
+                        <div class="form-check mb-3">
+                            <input type="radio" class="form-check-input" id="payment-vnpay" name="payment" value="vnpay" required>
+                            <label class="form-check-label" for="payment-vnpay">VNPay</label>
+                        </div>
+                        <div id="payment-vnpay-show" class="alert alert-secondary">
+                            <p>Thanh toán an toàn qua VNPay.</p>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Checkout End -->

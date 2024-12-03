@@ -1,0 +1,22 @@
+﻿@model Menus
+
+<form method="post" action="/admin/menus/create" enctype="multipart/form-data">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4 shadow">
+            <h6 class="fw-bold text-primary mb-4">Create Menu</h6>
+
+            <div class="row">
+                <!-- Menu Name -->
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Name" class="form-label">Name</label>
+                    <input type="text" asp-for="Name" class="form-control" />
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="/admin/menus" class="btn btn-secondary ms-2">Back to Menus</a>
+            </div>
+        </div>
+    </div>
+</form>

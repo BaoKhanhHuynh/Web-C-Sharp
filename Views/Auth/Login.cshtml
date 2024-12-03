@@ -1,0 +1,35 @@
+﻿@model WebApp.Models.LoginModel
+@{
+	ViewData["Title"] = "Login";
+}
+@if (TempData["err"] != null)
+{
+	<div class="alert alert-danger">
+		@TempData["err"]
+	</div>
+}
+<form method="post">
+	<div class="form-group">
+		<label asp-for="Eml">Email</label>
+		<input type="email" class="form-control" name="Eml" required />
+	</div>
+	<div class="form-group">
+		<label asp-for="Pwd">Password</label>
+		<input type="password" class="form-control" name="Pwd" required />
+	</div>
+	<div>
+		<label asp-for="Rem">Rember Me</label>
+		<div>
+			<input type="checkbox" asp-for="Rem">
+		</div>
+	</div>
+	<div>
+
+		<button type="submit" class="btn btn-primary">Login</button>
+
+		<a href="/auth/googlelogin" class="btn btn-primary google-sign-in-button">
+			Sign in with Google
+		</a>
+
+	</div>
+</form>

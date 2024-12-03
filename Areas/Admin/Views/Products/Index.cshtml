@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Products>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4 shadow">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="fw-bold text-primary">Products Management</h6>
+            <a href="/admin/products/create" class="btn btn-sm btn-success">Add Product</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle mb-0 text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Menu</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ProductId</td>
+                                <td>@item.Name</td>
+                                <td>@item.Menus?.Name</td>
+                                <td>$@item.Price</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    <img src="@item.Images" alt="Product Image" class="img-thumbnail" style="width: 70px; height: 70px;" />
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a class="btn btn-sm btn-warning" href="/admin/products/edit/@item.ProductId">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <form action="/admin/menus/delete" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@item.ProductId" />
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="text-muted">No products found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

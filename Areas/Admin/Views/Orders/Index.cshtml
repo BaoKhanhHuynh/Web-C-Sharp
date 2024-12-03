@@ -1,0 +1,59 @@
+﻿ @model IEnumerable<Orders>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4 shadow">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0 fw-bold text-primary">Orders Management</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Member ID</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Order Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.OrderId</td>
+                                <td>@item.MemberId</td>
+                                <td>@item.TotalAmount</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Address</td>
+                                <td>@item.Country</td>
+                                <td>@item.State</td>
+                                <td>@item.Note</td>
+                                <td>@item.City</td>
+                                <td>@item.Phone</td>
+                                <td>@item.Email</td>
+                                <td>@item.OrderDate</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="13" class="text-center text-muted">No orders found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

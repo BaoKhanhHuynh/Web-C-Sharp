@@ -1,0 +1,31 @@
+﻿<div class="container text-center py-5">
+	<!-- Thanh toán thành công -->
+	<div class="alert alert-success py-4" role="alert">
+		<h1 class="text-success fw-bold mb-3">Thanh toán thành công!</h1>
+		<p class="mb-4">Cảm ơn bạn đã mua sắm. Đơn hàng của bạn đã được xử lý thành công.</p>
+		<a href="/home/index" class="btn btn-primary px-4 py-2">Quay lại trang chủ</a>
+	</div>
+
+	<!-- Phản ánh khách hàng -->
+	<div class="mt-5">
+		<h2 class="text-primary fw-bold">Phản ánh về trải nghiệm của bạn</h2>
+		<p>Chúng tôi rất mong nhận được ý kiến đóng góp từ bạn để cải thiện dịch vụ.</p>
+
+		<form method="post" action="/cart/feedback">
+			<div class="mb-3">
+				<label for="Name" class="form-label">Họ và tên</label>
+				<input type="text" class="form-control" id="Name" name="Name" placeholder="Nhập họ và tên của bạn" required>
+			</div>
+			<div class="mb-3">
+				<label for="Position" class="form-label">Email</label>
+				<input type="text" class="form-control" id="customerEmail" name="Position" placeholder="Nhập email của bạn" required>
+			</div>
+			<div class="mb-3">
+				<label for="Description" class="form-label">Phản ánh của bạn</label>
+				<textarea class="form-control" id="Description" name="Description" rows="5" placeholder="Chia sẻ ý kiến của bạn" required></textarea>
+			</div>
+
+			<button type="submit" class="btn btn-success px-4 py-2">Gửi phản ánh</button>
+		</form>
+	</div>
+</div>
